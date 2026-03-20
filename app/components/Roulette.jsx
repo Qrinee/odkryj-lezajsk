@@ -162,6 +162,7 @@ export default function Roulette({
               <span className="text-gray-400 text-xl mb-4 block uppercase tracking-[0.4em] font-semibold">Wygrałeś!</span>
               <div className={`w-64 h-72 mx-auto flex flex-col items-center justify-center rounded-2xl shadow-2xl ${winner.color} ${winner.text} relative overflow-hidden transform hover:scale-105 transition-transform duration-500`}>
                 <div className="absolute inset-0 bg-white opacity-20 mix-blend-overlay"></div>
+                <div className="absolute inset-0 bg-white opacity-20 mix-blend-overlay"></div>
                 <span className="text-2xl font-black text-center px-4 uppercase tracking-wider drop-shadow-md">
                   {winner.name}
                 </span>

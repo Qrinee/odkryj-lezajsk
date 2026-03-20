@@ -6,10 +6,11 @@ import { OrbitControls } from "@react-three/drei";
 import { MuseumModel, KlasztorModel, KosciolModel, DworzecModel, RatuszModel } from "./city3d/Building";
 import CameraController from "./city3d/CameraController";
 import Environment from "./city3d/Environment";
+import BuildingPopup from "./BuildingPopup";
 import { BUILDINGS_CONFIG } from "./city3d/buildingsConfig";
 
 // Main 3D Scene
-function Scene({ elements, unlockedElements, zoomTarget, onZoomChange }) {
+function Scene({ elements, unlockedElements, zoomTarget, onBuildingClick }) {
   const isUnlocked = (code) => unlockedElements.includes(code);
 
   return (
@@ -33,6 +34,7 @@ function Scene({ elements, unlockedElements, zoomTarget, onZoomChange }) {
               name={element.name}
               isUnlocked={isUnlocked(element.code)}
               isTargeted={isTargeted}
+              onClick={() => onBuildingClick(element)}
             />
           );
         }
@@ -45,6 +47,7 @@ function Scene({ elements, unlockedElements, zoomTarget, onZoomChange }) {
               name={element.name}
               isUnlocked={isUnlocked(element.code)}
               isTargeted={isTargeted}
+              onClick={() => onBuildingClick(element)}
             />
           );
         }
@@ -57,6 +60,7 @@ function Scene({ elements, unlockedElements, zoomTarget, onZoomChange }) {
               name={element.name}
               isUnlocked={isUnlocked(element.code)}
               isTargeted={isTargeted}
+              onClick={() => onBuildingClick(element)}
             />
           );
         }
@@ -69,6 +73,7 @@ function Scene({ elements, unlockedElements, zoomTarget, onZoomChange }) {
               name={element.name}
               isUnlocked={isUnlocked(element.code)}
               isTargeted={isTargeted}
+              onClick={() => onBuildingClick(element)}
             />
           );
         }
@@ -81,6 +86,7 @@ function Scene({ elements, unlockedElements, zoomTarget, onZoomChange }) {
               name={element.name}
               isUnlocked={isUnlocked(element.code)}
               isTargeted={isTargeted}
+              onClick={() => onBuildingClick(element)}
             />
           );
         }
@@ -105,7 +111,21 @@ function Scene({ elements, unlockedElements, zoomTarget, onZoomChange }) {
 // Main component
 export default function City3D({ elements, unlockedElements, onElementClick }) {
   const [zoomTarget, setZoomTarget] = useState(null);
+  const [selectedElement, setSelectedElement] = useState(null);
 
+  // Handle building click - zoom to it and show popup
+  const handleBuildingClick = useCallback((element) => {
+    // Set zoom target to focus camera on the building
+    setZoomTarget(element.id);
+    // Show popup for this element
+    setSelectedElement(element);
+  }, []);
+
+  const handleClosePopup = useCallback(() => {
+    setSelectedElement(null);
+  }, []);
+
+  const isElementUnlocked = (code) => unlockedElements.includes(code);
 
   return (
     <div className="w-full h-[600px] rounded-3xl overflow-hidden shadow-2xl">
@@ -118,6 +138,7 @@ export default function City3D({ elements, unlockedElements, onElementClick }) {
           elements={elements} 
           unlockedElements={unlockedElements}
           zoomTarget={zoomTarget}
+          onBuildingClick={handleBuildingClick}
         />
       </Canvas>
       
@@ -137,9 +158,18 @@ export default function City3D({ elements, unlockedElements, onElementClick }) {
           <span>Odkryty</span>
         </div>
         <div className="border-t border-slate-700 mt-2 pt-2">
-          <p className="text-cyan-400 text-xs">💡 Kliknij budynek aby przybliżyć</p>
+          <p className="text-cyan-400 text-xs">💡 Kliknij budynek aby zobaczyć szczegóły</p>
         </div>
       </div>
+
+      {/* Building Popup */}
+      {selectedElement && (
+        <BuildingPopup 
+          element={selectedElement}
+          isUnlocked={isElementUnlocked(selectedElement.code)}
+          onClose={handleClosePopup}
+        />
+      )}
     </div>
   );
 }
