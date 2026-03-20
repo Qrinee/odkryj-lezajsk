@@ -42,8 +42,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      
-      <Hero 
+
+      <Hero
         inputCode={inputCode}
         setInputCode={setInputCode}
         error={error}
@@ -52,15 +52,15 @@ export default function Home() {
         totalElements={CITY_ELEMENTS.length}
       />
 
-      <WaveDivider />
+      {/* <WaveDivider /> */}
 
-      <main className="relative bg-sky-50 pb-16">
-        
-        <SectionTitle />
+      <main className="relative bg-sky-50">
+
+        {/* <SectionTitle /> */}
 
         <div className="mx-auto px-4" ref={cityRef}>
-          <City3D 
-            elements={CITY_ELEMENTS} 
+          <City3D
+            elements={CITY_ELEMENTS}
             unlockedElements={unlockedElements}
             autoOpenElement={autoOpenElement}
             onElementClick={(element) => {
@@ -71,7 +71,7 @@ export default function Home() {
           />
         </div>
 
-        <CityElementsGrid 
+        <CityElementsGrid
           elements={CITY_ELEMENTS}
           isUnlocked={isUnlocked}
           showUnlockAnimation={showUnlockAnimation}

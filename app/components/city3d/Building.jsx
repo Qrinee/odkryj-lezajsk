@@ -58,7 +58,6 @@ export function FbxBuilding({ modelName, position, name, isUnlocked, onClick, is
     if (isTargeted && !isUnlocked) {
       setLockAnimating(true);
       setTimeout(() => {
-        setShowLock(false);
         setLockAnimating(false);
       }, 1500);
     } else if (isUnlocked) {

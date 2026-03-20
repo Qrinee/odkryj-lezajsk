@@ -297,19 +297,27 @@ export default function Environment() {
 
       <HappyRocks />
 
-      <ambientLight intensity={0.7} />
+      <ambientLight intensity={0.4} />
       <directionalLight
-        position={[30, 40, 20]}
+        position={[30, 60, 20]}
         intensity={1.2}
         castShadow
         color="#fff5e6"
+        shadow-bias={-0.0005}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-camera-far={150}
+        shadow-camera-left={-60}
+        shadow-camera-right={60}
+        shadow-camera-top={60}
+        shadow-camera-bottom={-60}
       />
-      <pointLight position={[0, 10, 0]} intensity={0.4} color="#ffe4b5" />
+      <pointLight position={[0, 15, 0]} intensity={0.3} color="#ffe4b5" />
 
       <hemisphereLight
-        color="#87ceeb"
+        color="#ffffff"
         groundColor="#90EE90"
-        intensity={0.5}
+        intensity={0.3}
       />
 
       <Terrain />
