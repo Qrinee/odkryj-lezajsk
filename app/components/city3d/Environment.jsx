@@ -7,18 +7,7 @@ import * as THREE from "three";
 // Low poly flat terrain
 export function Terrain() {
   const geometry = useMemo(() => {
-    const geo = new THREE.PlaneGeometry(80, 80, 20, 20);
-    const posAttr = geo.attributes.position;
-    
-    // Add subtle low poly variation
-    for (let i = 0; i < posAttr.count; i++) {
-      const x = posAttr.getX(i);
-      const y = posAttr.getY(i);
-      // Very subtle random variation for low poly effect
-      const height = (Math.random() - 0.5) * 0.15;
-      posAttr.setZ(i, height);
-    }
-    
+    const geo = new THREE.CircleGeometry(42, 64);
     geo.computeVertexNormals();
     return geo;
   }, []);
@@ -43,6 +32,7 @@ export function Terrain() {
 export function FlatGround() {
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.31, 0]} receiveShadow>
+      <circleGeometry args={[45, 64]} />
       <meshStandardMaterial color="#4a9c54" roughness={0.95} flatShading={true} />
     </mesh>
   );
