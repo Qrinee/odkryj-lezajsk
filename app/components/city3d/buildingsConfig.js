@@ -1,5 +1,4 @@
-// Building configurations - single source of truth for all building positions and scales
-// Edit this file to change building positions and scales
+
 
 export const BUILDINGS_CONFIG = [
   {
@@ -53,18 +52,15 @@ export const BUILDINGS_CONFIG = [
     labelPosition: [0, 3, 0],
   },
 ];
-
-// Helper to get building config by model name
+
 export const getBuildingConfig = (modelName) => {
   return BUILDINGS_CONFIG.find((b) => b.model === modelName);
 };
-
-// Helper to get building config by ID
+
 export const getBuildingConfigById = (id) => {
   return BUILDINGS_CONFIG.find((b) => b.id === id);
 };
-
-// Helper to get all positions for camera targeting
+
 export const BUILDING_POSITIONS = BUILDINGS_CONFIG.map((b) => ({
   position: b.position,
 }));

@@ -6,7 +6,6 @@ export default function Footer() {
         <span className="font-bold text-slate-700 text-lg">Leżajsk</span>
       </div>
       <p className="text-slate-500 text-sm">Miasto z historią • 2026</p>
-      <p className="text-slate-400 text-xs mt-2">Powered by Woda Leżajsk</p>
     </footer>
   );
 }

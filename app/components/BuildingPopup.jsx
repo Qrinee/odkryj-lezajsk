@@ -7,7 +7,7 @@ export default function BuildingPopup({ element, isUnlocked, onClose }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Trigger animation after mount
+   
     setTimeout(() => setIsVisible(true), 10);
   }, []);
 
@@ -21,15 +21,14 @@ export default function BuildingPopup({ element, isUnlocked, onClose }) {
       className={`fixed inset-0 z-[999999] flex items-center justify-center p-4 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
       onClick={handleClose}
     >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
       
-      {/* Popup Content */}
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+
       <div 
         className={`relative bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 transform transition-all duration-300 ${isVisible ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'}`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close button */}
+        
         <button 
           onClick={handleClose}
           className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
@@ -39,7 +38,6 @@ export default function BuildingPopup({ element, isUnlocked, onClose }) {
           </svg>
         </button>
 
-        {/* Header */}
         <div className="flex items-center gap-4 mb-4">
           <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl ${isUnlocked ? 'bg-cyan-500' : 'bg-slate-500'}`}>
             {element.icon}
@@ -50,10 +48,9 @@ export default function BuildingPopup({ element, isUnlocked, onClose }) {
           </div>
         </div>
 
-        {/* Content */}
         {isUnlocked ? (
           <div className="space-y-4 overflow-y-auto max-h-[60vh] pr-1 scrollbar-thin scrollbar-thumb-slate-200">
-            {/* Image Slider */}
+            
             {(element.oldImage && element.newImage) ? (
               <BeforeAfterSlider 
                 beforeImage={element.oldImage} 
@@ -63,7 +60,6 @@ export default function BuildingPopup({ element, isUnlocked, onClose }) {
               <img src={element.image} alt={element.name} className="w-full aspect-video object-cover rounded-xl shadow-inner" />
             )}
 
-            {/* Trivia / Ciekawostki */}
             {element.trivia && element.trivia.length > 0 && (
               <div className="bg-cyan-50/70 rounded-xl p-4 shadow-sm border border-cyan-100">
                 <h4 className="font-bold text-cyan-800 mb-3 flex items-center gap-2">
@@ -87,7 +83,6 @@ export default function BuildingPopup({ element, isUnlocked, onClose }) {
               </div>
             )}
 
-            {/* Opis */}
             <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-100">
               <p className="text-slate-600 leading-relaxed text-sm">
                 <strong>Gratulacje!</strong> Odblokowałeś dostęp do tych informacji. {element.description}
@@ -111,7 +106,6 @@ export default function BuildingPopup({ element, isUnlocked, onClose }) {
           </div>
         )}
 
-        {/* Action button for locked items */}
         {!isUnlocked && (
           <button 
             onClick={handleClose}

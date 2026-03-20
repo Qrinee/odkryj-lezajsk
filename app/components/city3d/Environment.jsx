@@ -3,8 +3,9 @@
 import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { BUILDINGS_CONFIG } from "./buildingsConfig";
 
-// Low poly flat terrain
+
 export function Terrain() {
   const geometry = useMemo(() => {
     const geo = new THREE.CircleGeometry(42, 64);
@@ -28,7 +29,7 @@ export function Terrain() {
   );
 }
 
-// Low poly flat ground area
+
 export function FlatGround() {
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.31, 0]} receiveShadow>
@@ -38,14 +39,9 @@ export function FlatGround() {
   );
 }
 
-// Simple low poly grid
-export function CityGrid() {
-  return (
-    <></>
-  );
-}
 
-// Happy sun
+
+
 function HappySun() {
   const sunRef = useRef();
 
@@ -57,7 +53,7 @@ function HappySun() {
 
   return (
     <group position={[50, 40, 30]}>
-      {/* Sun core */}
+
       <mesh ref={sunRef}>
         <octahedronGeometry args={[5, 0]} />
         <meshStandardMaterial
@@ -67,7 +63,7 @@ function HappySun() {
           flatShading={true}
         />
       </mesh>
-      {/* Sun rays */}
+
       {[...Array(8)].map((_, i) => (
         <mesh key={i} position={[
           Math.cos(i * Math.PI / 4) * 7,
@@ -87,7 +83,7 @@ function HappySun() {
   );
 }
 
-// Happy clouds
+
 function HappyClouds() {
   const cloudsRef = useRef();
   const count = 5;
@@ -121,7 +117,7 @@ function HappyClouds() {
     <group ref={cloudsRef}>
       {cloudPositions.map((pos, i) => (
         <group key={i} position={[pos.x, pos.y, pos.z]} scale={pos.scale}>
-          {/* Cloud puffs - low poly */}
+
           <mesh position={[0, 0, 0]}>
             <dodecahedronGeometry args={[1.5, 0]} />
             <meshStandardMaterial color="#ffffff" flatShading={true} />
@@ -144,7 +140,7 @@ function HappyClouds() {
   );
 }
 
-// Ambient particles - low poly
+
 export function Particles() {
   const particlesRef = useRef();
   const count = 30;
@@ -180,23 +176,127 @@ export function Particles() {
   );
 }
 
-// Main Environment component with happier sky
+
+function HappyTrees() {
+  const treePositions = useMemo(() => {
+    const positions = [];
+    const targetCount = 15;
+    let attempts = 0;
+
+    while (positions.length < targetCount && attempts < 1000) {
+      attempts++;
+      const angle = Math.random() * Math.PI * 2;
+      const r = 5 + Math.random() * 37;
+      const x = Math.cos(angle) * r;
+      const z = Math.sin(angle) * r;
+
+      const isColliding = BUILDINGS_CONFIG.some(b => {
+        const dx = b.position[0] - x;
+        const dz = b.position[2] - z;
+        return Math.sqrt(dx * dx + dz * dz) < 13.5;
+      });
+
+      if (!isColliding) {
+        positions.push({
+          x, z,
+          scale: 0.6 + Math.random() * 0.8,
+          rotation: Math.random() * Math.PI
+        });
+      }
+    }
+    return positions;
+  }, []);
+
+  return (
+    <group>
+      {treePositions.map((pos, i) => (
+        <group key={`tree-${i}`} position={[pos.x, 0, pos.z]} scale={pos.scale} rotation={[0, pos.rotation, 0]}>
+          <mesh position={[0, 1, 0]} castShadow receiveShadow>
+            <cylinderGeometry args={[0.2, 0.4, 2, 5]} />
+            <meshStandardMaterial color="#5c4033" flatShading />
+          </mesh>
+          <mesh position={[0, 2.5, 0]} castShadow receiveShadow>
+            <dodecahedronGeometry args={[1.5, 0]} />
+            <meshStandardMaterial color="#2d5a27" flatShading />
+          </mesh>
+          <mesh position={[0, 3.8, 0]} castShadow receiveShadow>
+            <dodecahedronGeometry args={[1.2, 0]} />
+            <meshStandardMaterial color="#3a7033" flatShading />
+          </mesh>
+        </group>
+      ))}
+    </group>
+  );
+}
+
+function HappyRocks() {
+  const rockPositions = useMemo(() => {
+    const positions = [];
+    const targetCount = 15;
+    let attempts = 0;
+
+    while (positions.length < targetCount && attempts < 1000) {
+      attempts++;
+      const angle = Math.random() * Math.PI * 2;
+      const r = 5 + Math.random() * 38;
+      const x = Math.cos(angle) * r;
+      const z = Math.sin(angle) * r;
+
+      const isColliding = BUILDINGS_CONFIG.some(b => {
+        const dx = b.position[0] - x;
+        const dz = b.position[2] - z;
+        return Math.sqrt(dx * dx + dz * dz) < 11.5;
+      });
+
+      if (!isColliding) {
+        positions.push({
+          x, z,
+          scale: 0.3 + Math.random() * 0.9,
+          rotX: Math.random() * Math.PI,
+          rotY: Math.random() * Math.PI,
+          rotZ: Math.random() * Math.PI,
+        });
+      }
+    }
+    return positions;
+  }, []);
+
+  return (
+    <group>
+      {rockPositions.map((pos, i) => (
+        <mesh
+          key={`rock-${i}`}
+          position={[pos.x, 0, pos.z]}
+          scale={pos.scale}
+          rotation={[pos.rotX, pos.rotY, pos.rotZ]}
+          castShadow
+          receiveShadow
+        >
+          <dodecahedronGeometry args={[1, 0]} />
+          <meshStandardMaterial color="#7f8c8d" roughness={0.9} flatShading />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+
 export default function Environment() {
   return (
     <>
-      {/* Happy blue sky gradient background */}
+
       <color attach="background" args={['#87ceeb']} />
 
-      {/* Fog for atmosphere */}
       <fog attach="fog" args={['#85ec6bff', 30, 180]} />
 
-      {/* Happy sun */}
       <HappySun />
 
-      {/* Happy clouds */}
       <HappyClouds />
 
-      {/* Bright warm lighting */}
+      <HappyTrees />
+
+      <HappyRocks />
+
       <ambientLight intensity={0.7} />
       <directionalLight
         position={[30, 40, 20]}
@@ -206,19 +306,16 @@ export default function Environment() {
       />
       <pointLight position={[0, 10, 0]} intensity={0.4} color="#ffe4b5" />
 
-      {/* Hemisphere light for natural sky/ground colors */}
       <hemisphereLight
         color="#87ceeb"
         groundColor="#90EE90"
         intensity={0.5}
       />
 
-      {/* Terrain and ground */}
       <Terrain />
       <FlatGround />
-      <CityGrid />
 
-      {/* Particles */}
+
       <Particles />
     </>
   );

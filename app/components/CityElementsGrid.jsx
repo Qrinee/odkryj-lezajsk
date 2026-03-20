@@ -28,7 +28,7 @@ export default function CityElementsGrid({
                 }
               }}
             >
-              {/* Image */}
+              
               <div className="relative h-48 overflow-hidden">
                 <img 
                   src={element.image} 
@@ -36,8 +36,7 @@ export default function CityElementsGrid({
                   className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${unlocked ? '' : 'filter blur-lg scale-110'}`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent" />
-                
-                {/* Icon overlay */}
+
                 <div className={`absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-lg transition-all duration-300 ${unlocked ? 'bg-cyan-500 text-white' : 'bg-slate-600 text-white'}`}>
                   {unlocked ? element.icon : (
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -46,7 +45,6 @@ export default function CityElementsGrid({
                   )}
                 </div>
 
-                {/* Locked overlay */}
                 {!unlocked && (
                   <div className="absolute inset-0 flex items-center justify-center bg-slate-900/30">
                     <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur flex items-center justify-center">
@@ -57,8 +55,7 @@ export default function CityElementsGrid({
                   </div>
                 )}
               </div>
-              
-              {/* Content */}
+
               <div className="relative p-5">
                 {unlocked ? (
                   <>
@@ -84,7 +81,6 @@ export default function CityElementsGrid({
                 )}
               </div>
 
-              {/* Decorative corner */}
               {unlocked && (
                 <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden">
                   <div className="absolute top-2 right-2 w-8 h-8 bg-gradient-to-br from-cyan-400 to-sky-500 rounded-bl-full" />

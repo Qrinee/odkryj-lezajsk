@@ -1,4 +1,4 @@
-// City elements that can be unlocked with codes
+
 export const CITY_ELEMENTS = [
   { 
     id: 1, 
@@ -101,8 +101,7 @@ export const CITY_ELEMENTS = [
     ]
   },
 ];
-
-// Example items for roulette (can be customized with actual city elements)
+
 export const ROULETTE_ITEMS = [
   { id: 1, name: "Muzeum",  color: "bg-amber-500", text: "text-amber-100", originalElement: CITY_ELEMENTS[0] },
   { id: 2, name: "Klasztor", color: "bg-emerald-500", text: "text-emerald-100", originalElement: CITY_ELEMENTS[1] },
@@ -111,4 +110,4 @@ export const ROULETTE_ITEMS = [
   { id: 5, name: "Ratusz",  color: "bg-pink-500", text: "text-pink-100", originalElement: CITY_ELEMENTS[4] },
 ];
 
-export const SPIN_DURATION_MS = 10000; // 10 seconds spin
+export const SPIN_DURATION_MS = 10000;

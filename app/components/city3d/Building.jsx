@@ -6,15 +6,13 @@ import { Html } from "@react-three/drei";
 import { FBXLoader } from "three-stdlib";
 import * as THREE from "three";
 import { BUILDINGS_CONFIG, getBuildingConfig } from "./buildingsConfig";
-
-// Generic FBX Building component that uses config for all settings
+
 export function FbxBuilding({ modelName, position, name, isUnlocked, onClick, isTargeted }) {
   const groupRef = useRef();
   const [showLock, setShowLock] = useState(true);
   const [lockAnimating, setLockAnimating] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  
-  // Get config for this building type
+
   const config = getBuildingConfig(modelName);
   const fbxPath = config?.fbxPath || `/fbx/${modelName}.fbx`;
   const scale = config?.scale || 0.01;
@@ -22,8 +20,7 @@ export function FbxBuilding({ modelName, position, name, isUnlocked, onClick, is
   const labelPos = config?.labelPosition || [0, 3, 0];
   
   const fbx = useLoader(FBXLoader, fbxPath);
-  
-  // Apply visibility effect when isUnlocked changes
+
   useEffect(() => {
     if (!fbx) return;
     
@@ -33,14 +30,13 @@ export function FbxBuilding({ modelName, position, name, isUnlocked, onClick, is
       if (child.isMesh) {
         child.castShadow = true;
         child.receiveShadow = true;
-        
-        // Store reference to original material on first render
+
         if (!child.userData.originalMaterial) {
           child.userData.originalMaterial = child.material;
         }
         
         if (!isUnlocked) {
-          // Apply dark silhouette material
+         
           child.material = new THREE.MeshStandardMaterial({
             color: 0x111111,
             transparent: true,
@@ -49,7 +45,7 @@ export function FbxBuilding({ modelName, position, name, isUnlocked, onClick, is
             metalness: 0.1,
           });
         } else {
-          // Restore original FBX material when unlocked
+         
           if (child.userData.originalMaterial) {
             child.material = child.userData.originalMaterial;
           }
@@ -58,7 +54,6 @@ export function FbxBuilding({ modelName, position, name, isUnlocked, onClick, is
     });
   }, [fbx, isUnlocked, scale]);
 
-  // Trigger unlock animation when targeted
   useEffect(() => {
     if (isTargeted && !isUnlocked) {
       setLockAnimating(true);
@@ -71,7 +66,6 @@ export function FbxBuilding({ modelName, position, name, isUnlocked, onClick, is
     }
   }, [isTargeted, isUnlocked]);
 
-  // Calculate hover scale based on base scale
   const hoverScale = isHovered ? 1.08 : 1;
   
   return (
@@ -94,7 +88,7 @@ export function FbxBuilding({ modelName, position, name, isUnlocked, onClick, is
       }}
       scale={hoverScale}
     >
-      {/* Glow effect on hover */}
+      
       {isHovered && (
         <pointLight
           position={[0, 5, 0]}
@@ -104,8 +98,7 @@ export function FbxBuilding({ modelName, position, name, isUnlocked, onClick, is
         />
       )}
       <primitive object={fbx} />
-      
-      {/* Lock marker */}
+
       {showLock && (
         <Html position={lockPos} center zIndexRange={[100, 0]}>
           <div className={`flex flex-col items-center transition-all duration-500 ${
@@ -137,7 +130,6 @@ export function FbxBuilding({ modelName, position, name, isUnlocked, onClick, is
         </Html>
       )}
 
-      {/* Name label */}
       {isUnlocked && (
         <Html position={labelPos} center zIndexRange={[100, 0]}>
           <div className="px-4 py-2 bg-cyan-500/90 rounded-lg shadow-lg animate-label-appear">
@@ -148,8 +140,7 @@ export function FbxBuilding({ modelName, position, name, isUnlocked, onClick, is
     </group>
   );
 }
-
-// Wrapper components for each building type
+
 export function MuseumModel(props) {
   return <FbxBuilding modelName="muzeum" {...props} />;
 }

@@ -7,7 +7,7 @@ export default function BeforeAfterSlider({ beforeImage, afterImage, beforeLabel
 
   return (
     <div className="relative w-full rounded-xl overflow-hidden group shadow-inner bg-slate-100">
-      {/* After Image (Background/Bottom - wyznacza wysokość kontenera) */}
+      
       <div className="w-full relative">
         <img src={afterImage} alt="Obecny wygląd" className="w-full h-auto block" />
         <div className="absolute top-3 right-3 bg-black/60 text-white text-xs font-semibold px-2.5 py-1 rounded backdrop-blur-md transition-opacity">
@@ -15,19 +15,17 @@ export default function BeforeAfterSlider({ beforeImage, afterImage, beforeLabel
         </div>
       </div>
 
-      {/* Before Image (Foreground/Top, Clipped) */}
       <div 
         className="absolute inset-0 w-full h-full"
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
         <img src={beforeImage} alt="Dawny wygląd" className="w-full h-full object-cover" />
-        {/* Przykładowy filtr sepia/grayscale można nałożyć na zdjęcie dawne ręcznie stylizując np. klasę, ale tu zakładamy odpowiednie zrodlo starego zdjecia */}
+        
         <div className="absolute top-3 left-3 bg-black/60 text-white text-xs font-semibold px-2.5 py-1 rounded backdrop-blur-md transition-opacity">
           {beforeLabel}
         </div>
       </div>
 
-      {/* Slider Control Line & Thumb */}
       <div 
         className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_8px_rgba(0,0,0,0.6)] pointer-events-none transition-transform"
         style={{ left: `${sliderPosition}%`, transform: `translateX(-50%)` }}
@@ -39,7 +37,6 @@ export default function BeforeAfterSlider({ beforeImage, afterImage, beforeLabel
         </div>
       </div>
 
-      {/* Invisible Range Input for Interaction */}
       <input
         type="range"
         min="0"
