@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import BeforeAfterSlider from "./BeforeAfterSlider";
 
 export default function BuildingPopup({ element, isUnlocked, onClose }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,7 +18,7 @@ export default function BuildingPopup({ element, isUnlocked, onClose }) {
 
   return (
     <div 
-      className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+      className={`fixed inset-0 z-[999999] flex items-center justify-center p-4 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
       onClick={handleClose}
     >
       {/* Backdrop */}
@@ -51,10 +52,47 @@ export default function BuildingPopup({ element, isUnlocked, onClose }) {
 
         {/* Content */}
         {isUnlocked ? (
-          <div className="bg-cyan-50 rounded-xl p-4">
-            <p className="text-slate-600 leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            </p>
+          <div className="space-y-4 overflow-y-auto max-h-[60vh] pr-1 scrollbar-thin scrollbar-thumb-slate-200">
+            {/* Image Slider */}
+            {(element.oldImage && element.newImage) ? (
+              <BeforeAfterSlider 
+                beforeImage={element.oldImage} 
+                afterImage={element.newImage} 
+              />
+            ) : (
+              <img src={element.image} alt={element.name} className="w-full aspect-video object-cover rounded-xl shadow-inner" />
+            )}
+
+            {/* Trivia / Ciekawostki */}
+            {element.trivia && element.trivia.length > 0 && (
+              <div className="bg-cyan-50/70 rounded-xl p-4 shadow-sm border border-cyan-100">
+                <h4 className="font-bold text-cyan-800 mb-3 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Czy wiesz, że...
+                </h4>
+                <ul className="space-y-2.5">
+                  {element.trivia.map((fact, idx) => (
+                    <li key={idx} className="text-slate-700 text-sm flex gap-2.5 items-start">
+                      <span className="text-cyan-500 mt-1">
+                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                          <circle cx="10" cy="10" r="4" />
+                        </svg>
+                      </span>
+                      <span className="leading-snug">{fact}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Opis */}
+            <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-100">
+              <p className="text-slate-600 leading-relaxed text-sm">
+                <strong>Gratulacje!</strong> Odblokowałeś dostęp do tych informacji. {element.description}
+              </p>
+            </div>
           </div>
         ) : (
           <div className="bg-slate-100 rounded-xl p-4">

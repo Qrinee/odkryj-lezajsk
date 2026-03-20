@@ -13,13 +13,13 @@ export function Terrain() {
   }, []);
 
   return (
-    <mesh 
-      rotation={[-Math.PI / 2, 0, 0]} 
-      position={[0, -0.3, 0]} 
+    <mesh
+      rotation={[-Math.PI / 2, 0, 0]}
+      position={[0, -0.3, 0]}
       receiveShadow
       geometry={geometry}
     >
-      <meshStandardMaterial 
+      <meshStandardMaterial
         color="#5aaf65"
         roughness={0.9}
         flatShading={true}
@@ -48,7 +48,7 @@ export function CityGrid() {
 // Happy sun
 function HappySun() {
   const sunRef = useRef();
-  
+
   useFrame((state) => {
     if (sunRef.current) {
       sunRef.current.rotation.z = state.clock.elapsedTime * 0.2;
@@ -60,8 +60,8 @@ function HappySun() {
       {/* Sun core */}
       <mesh ref={sunRef}>
         <octahedronGeometry args={[5, 0]} />
-        <meshStandardMaterial 
-          color="#ffd93d" 
+        <meshStandardMaterial
+          color="#ffd93d"
           emissive="#ffb300"
           emissiveIntensity={0.8}
           flatShading={true}
@@ -75,8 +75,8 @@ function HappySun() {
           0
         ]}>
           <boxGeometry args={[1.5, 4, 1]} />
-          <meshStandardMaterial 
-            color="#ffe066" 
+          <meshStandardMaterial
+            color="#ffe066"
             emissive="#ffcc00"
             emissiveIntensity={0.5}
             flatShading={true}
@@ -91,7 +91,7 @@ function HappySun() {
 function HappyClouds() {
   const cloudsRef = useRef();
   const count = 5;
-  
+
   const cloudPositions = useMemo(() => {
     const positions = [];
     for (let i = 0; i < count; i++) {
@@ -148,7 +148,7 @@ function HappyClouds() {
 export function Particles() {
   const particlesRef = useRef();
   const count = 30;
-  
+
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
@@ -186,38 +186,38 @@ export default function Environment() {
     <>
       {/* Happy blue sky gradient background */}
       <color attach="background" args={['#87ceeb']} />
-      
+
       {/* Fog for atmosphere */}
-      <fog attach="fog" args={['#b8e0ff', 30, 80]} />
-      
+      <fog attach="fog" args={['#85ec6bff', 30, 180]} />
+
       {/* Happy sun */}
       <HappySun />
-      
+
       {/* Happy clouds */}
       <HappyClouds />
-      
+
       {/* Bright warm lighting */}
       <ambientLight intensity={0.7} />
-      <directionalLight 
-        position={[30, 40, 20]} 
-        intensity={1.2} 
-        castShadow 
+      <directionalLight
+        position={[30, 40, 20]}
+        intensity={1.2}
+        castShadow
         color="#fff5e6"
       />
       <pointLight position={[0, 10, 0]} intensity={0.4} color="#ffe4b5" />
-      
+
       {/* Hemisphere light for natural sky/ground colors */}
-      <hemisphereLight 
-        color="#87ceeb" 
-        groundColor="#90EE90" 
-        intensity={0.5} 
+      <hemisphereLight
+        color="#87ceeb"
+        groundColor="#90EE90"
+        intensity={0.5}
       />
-      
+
       {/* Terrain and ground */}
       <Terrain />
       <FlatGround />
       <CityGrid />
-      
+
       {/* Particles */}
       <Particles />
     </>

@@ -107,7 +107,7 @@ export function FbxBuilding({ modelName, position, name, isUnlocked, onClick, is
       
       {/* Lock marker */}
       {showLock && (
-        <Html position={lockPos} center>
+        <Html position={lockPos} center zIndexRange={[100, 0]}>
           <div className={`flex flex-col items-center transition-all duration-500 ${
             lockAnimating ? 'animate-lock-shake scale-125' : ''
           }`}>
@@ -139,7 +139,7 @@ export function FbxBuilding({ modelName, position, name, isUnlocked, onClick, is
 
       {/* Name label */}
       {isUnlocked && (
-        <Html position={labelPos} center>
+        <Html position={labelPos} center zIndexRange={[100, 0]}>
           <div className="px-4 py-2 bg-cyan-500/90 rounded-lg shadow-lg animate-label-appear">
             <p className="text-white font-bold text-sm whitespace-nowrap">{name}</p>
           </div>
