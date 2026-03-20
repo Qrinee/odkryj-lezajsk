@@ -26,6 +26,9 @@ export default function RouletteSpinner({
   const timeoutIdRef = useRef(null);
   const finishCallbackRef = useRef(null);
 
+  const targetPositionRef = useRef(0);
+  const [isFreezing, setIsFreezing] = useState(false);
+
   useEffect(() => {
     if (elementToUnlock && showRoulette) {
       startSpin(elementToUnlock);
@@ -37,6 +40,7 @@ export default function RouletteSpinner({
 
     setIsSpinning(true);
     setIsFastForwarding(false);
+    setIsFreezing(false);
     setWinner(null);
     setShowWinner(false);
     setTranslateX(0);
@@ -70,11 +74,13 @@ export default function RouletteSpinner({
         finalPosition = -13000;
       }
 
+      targetPositionRef.current = finalPosition;
       setTranslateX(finalPosition);
 
       finishCallbackRef.current = () => {
         setIsSpinning(false);
         setIsFastForwarding(false);
+        setIsFreezing(false);
         setWinner(sequence[winningIndex]);
 
         setTimeout(() => {
@@ -107,14 +113,35 @@ export default function RouletteSpinner({
   }, [isSpinning, unlockedElements, setIsSpinning, setWinner, setShowWinner, setShowRoulette, setUnlockedElements, setNewlyUnlocked, setShowUnlockAnimation, onUnlockComplete]);
 
   const handleFastForward = () => {
-    if (isSpinning && !isFastForwarding) {
-      setIsFastForwarding(true);
+    if (isSpinning && !isFastForwarding && !isFreezing && containerRef.current) {
+      // 1. Zdobądź aktualną fizyczną pozycję kontenera w trakcie animacji
+      const style = window.getComputedStyle(containerRef.current);
+      let currentTx = 0;
+      if (style.transform && style.transform !== 'none') {
+        const matrix = new DOMMatrix(style.transform);
+        currentTx = matrix.m41;
+      }
+
+      // 2. Zamrożenie w miejscu obecnej pozycji bez animacji
+      setIsFreezing(true);
+      setTranslateX(currentTx);
+
       if (timeoutIdRef.current) {
         clearTimeout(timeoutIdRef.current);
-        timeoutIdRef.current = setTimeout(() => {
-          if (finishCallbackRef.current) finishCallbackRef.current();
-        }, 1200);
       }
+
+      // 3. Po zaktualizowaniu klatki, kontynuuj animację do końca 
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsFreezing(false);
+          setIsFastForwarding(true);
+          setTranslateX(targetPositionRef.current);
+          
+          timeoutIdRef.current = setTimeout(() => {
+            if (finishCallbackRef.current) finishCallbackRef.current();
+          }, 1200);
+        });
+      });
     }
   };
 
@@ -140,7 +167,7 @@ export default function RouletteSpinner({
             className="flex items-center h-full px-4"
             style={{
               transform: `translateX(${translateX}px)`,
-              transition: (isSpinning && translateX !== 0) ? `transform ${isFastForwarding ? 1200 : SPIN_DURATION_MS}ms cubic-bezier(0.1, 0.9, 0.2, 1)` : "none",
+              transition: (isSpinning && translateX !== 0 && !isFreezing) ? `transform ${isFastForwarding ? 1200 : SPIN_DURATION_MS}ms cubic-bezier(0.1, 0.9, 0.2, 1)` : "none",
               gap: '16px',
               width: 'max-content'
             }}
