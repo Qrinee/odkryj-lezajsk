@@ -213,12 +213,12 @@ export default function Roulette({
               {/* Progress */}
               <div className="pt-6 border-t border-slate-100">
                 <p className="text-sm text-slate-400 mb-3">
-                  Kolekcja: {unlockedElements.length + 1} / {totalElements}
+                  Kolekcja: {unlockedElements.length} / {totalElements}
                 </p>
                 <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-gradient-to-r from-cyan-500 to-sky-500 transition-all duration-700 rounded-full"
-                    style={{ width: `${((unlockedElements.length + 1) / totalElements) * 100}%` }}
+                    style={{ width: `${(unlockedElements.length / totalElements) * 100}%` }}
                   />
                 </div>
               </div>
