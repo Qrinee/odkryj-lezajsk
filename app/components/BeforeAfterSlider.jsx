@@ -6,10 +6,10 @@ export default function BeforeAfterSlider({ beforeImage, afterImage, beforeLabel
   const [sliderPosition, setSliderPosition] = useState(50);
 
   return (
-    <div className="relative w-full aspect-video rounded-xl overflow-hidden group shadow-inner bg-slate-100">
-      {/* After Image (Background/Bottom) */}
-      <div className="absolute inset-0 w-full h-full">
-        <img src={afterImage} alt="Obecny wygląd" className="w-full h-full object-cover" />
+    <div className="relative w-full rounded-xl overflow-hidden group shadow-inner bg-slate-100">
+      {/* After Image (Background/Bottom - wyznacza wysokość kontenera) */}
+      <div className="w-full relative">
+        <img src={afterImage} alt="Obecny wygląd" className="w-full h-auto block" />
         <div className="absolute top-3 right-3 bg-black/60 text-white text-xs font-semibold px-2.5 py-1 rounded backdrop-blur-md transition-opacity">
           {afterLabel}
         </div>

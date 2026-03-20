@@ -6,14 +6,18 @@ export const CITY_ELEMENTS = [
     code: "LZK-2YZA-4BCD", 
     description: "Muzeum Ziemi Leżajskiej wpisane w mury dawnego dworu", 
     icon: "🏛️", 
-    image: "https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=600&h=400&fit=crop", 
+    image: "/muzeum/nowe.jpg", 
     model: "muzeum",
-    oldImage: "https://images.unsplash.com/photo-1551008475-46065cd81977?w=600&h=400&fit=crop&grayscale=true",
-    newImage: "https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=600&h=400&fit=crop",
+    oldImage: "/muzeum/stary.jpg",
+    newImage: "/muzeum/nowe.jpg",
     trivia: [
-      "Budynek dawniej pełnił funkcję obronną jako część systemu fortyfikacji miasta.",
-      "Zgromadzono tu jedną z najbardziej niezwykłych wystaw historii browarnictwa w regionie.",
-      "W podziemiach zachowały się oryginalne ceglane sklepienia kolebkowe z dawnych czasów."
+      "Muzeum Ziemi Leżajskiej w Leżajsk zostało założone, aby gromadzić, dokumentować i prezentować dziedzictwo kulturowe, historyczne i przyrodnicze regionu. Placówka pełni rolę lokalnego centrum edukacji i historii, przybliżając mieszkańcom i turystom dzieje miasta i okolic.",
+      "Muzeum mieści się w historycznym budynku, którego architektura łączy elementy tradycyjne i modernistyczne, dzięki czemu sam obiekt jest atrakcją turystyczną.",
+      "Jedną z ciekawszych kolekcji są eksponaty związane z przemysłem i rzemiosłem Leżajska oraz okolic, w tym narzędzia rolnicze, dokumenty i przedmioty codziennego użytku z XIX i XX wieku.",
+      "Muzeum posiada również bogatą sekcję poświęconą sztuce sakralnej i religijnej regionu, w tym obrazy, rzeźby i przedmioty liturgiczne z lokalnych kościołów i klasztorów.",
+      "Placówka organizuje regularnie wystawy czasowe i wydarzenia edukacyjne, w tym warsztaty dla dzieci i młodzieży, co pozwala na aktywne włączenie społeczności w poznawanie lokalnej historii.",
+      "Muzeum Ziemi Leżajskiej współpracuje także z innymi instytucjami kultury w regionie, umożliwiając wymianę eksponatów i wspólne projekty badawcze oraz popularyzatorskie.",
+      "Pomimo niewielkich rozmiarów, muzeum odgrywa kluczową rolę w zachowaniu i upowszechnianiu tradycji i historii Ziemi Leżajskiej, będąc ważnym punktem na mapie kulturalnej miasta."
     ]
   },
   { 
@@ -22,30 +26,37 @@ export const CITY_ELEMENTS = [
     code: "LZK-3KLA-5SZT", 
     description: "Zespół klasztorny Ojców Bernardynów i Bazylika Zwiastowania NMP", 
     icon: "⛪", 
-    image: "https://images.unsplash.com/photo-1510021867896-83b6d722c064?w=600&h=400&fit=crop", 
+    image: "/klasztor/nowy.jpg", 
     model: "klasztor",
-    oldImage: "https://images.unsplash.com/photo-1548625361-ec853fbc2df8?w=600&h=400&fit=crop&grayscale=true",
-    newImage: "https://images.unsplash.com/photo-1510021867896-83b6d722c064?w=600&h=400&fit=crop",
+    oldImage: "/klasztor/stary.jpg",
+    newImage: "/klasztor/nowy.jpg",
     trivia: [
-      "W bazylice znajdują się jedne z najsłynniejszych w Europie organów z XVII wieku.",
-      "Świątynia posiada imponujący system ok. 6000 piszczałek podzielonych na 75 głosów.",
-      "Klasztor otoczony jest systemem potężnych obwarowań, do dziś przypominających twierdzę."
+      "Klasztor w Leżajsk, należący do zakonu Bernardyni, powstał na początku XVII wieku jako jedno z ważniejszych miejsc kultu religijnego w regionie. Jego rozwój był ściśle związany z rosnącym ruchem pielgrzymkowym.",
+      "Świątynia klasztorna, czyli Bazylika Zwiastowania Najświętszej Maryi Panny w Leżajsku, została wzniesiona w stylu barokowym i do dziś uchodzi za jeden z najcenniejszych zabytków sakralnych w południowo-wschodniej Polsce.",
+      "Największą sławę klasztor zawdzięcza kultowi Matki Bożej Leżajskiej, związanym z objawieniami z końca XVI wieku. Według tradycji Maryja miała ukazać się miejscowemu drwalowi, co zapoczątkowało rozwój sanktuarium i napływ pielgrzymów.",
+      "Wnętrze bazyliki kryje bogato zdobione ołtarze oraz liczne dzieła sztuki sakralnej, które powstawały na przestrzeni wieków i świadczą o znaczeniu tego miejsca w historii regionu.",
+      "Szczególną atrakcją są słynne organy, uznawane za jedne z najpiękniejszych w Europie. Instrument ten składa się z kilku części rozmieszczonych w różnych miejscach świątyni, co daje wyjątkowy efekt dźwiękowy.",
+      "Każdego roku w klasztorze odbywa się Międzynarodowy Festiwal Muzyki Organowej i Kameralnej w Leżajsku, który przyciąga artystów i melomanów z kraju i zagranicy.",
+      "Klasztor pełni nie tylko funkcję religijną, ale także kulturalną i historyczną – jest ważnym ośrodkiem życia duchowego oraz jednym z najczęściej odwiedzanych miejsc w regionie."
     ]
   },
   { 
     id: 3, 
     name: "Kościół", 
     code: "LZK-4KOS-6CIOL", 
-    description: "Zabytkowy kościół farny p.w. Trójcy Świętej i Wszystkich Świętych", 
+    description: "Kościół filialny pw. Jezusa Miłosiernego", 
     icon: "⛪", 
-    image: "https://images.unsplash.com/photo-1544383411-e6c278bc2b78?w=600&h=400&fit=crop", 
+    image: "/Kościół Pana Jezusa Miłosiernego/nowy.jpg", 
     model: "kosciol",
-    oldImage: "https://images.unsplash.com/photo-1447014421976-7fec21d26d86?w=600&h=400&fit=crop&grayscale=true",
-    newImage: "https://images.unsplash.com/photo-1544383411-e6c278bc2b78?w=600&h=400&fit=crop",
+    oldImage: "/Kościół Pana Jezusa Miłosiernego/stary.jpg",
+    newImage: "/Kościół Pana Jezusa Miłosiernego/nowy.jpg",
     trivia: [
-      "Pierwotny, drewniany kościół w tym miejscu powstał już w 1399 r.",
-      "Poważnie ucierpiał podczas m.in. najazdów tatarskich i był wielokrotnie przebudowywany.",
-      "We wnętrzu można podziwiać piękny barokowy ołtarz główny z XVII wieku."
+      "Kościół filialny pw. Jezusa Miłosiernego w Leżajsk, nazywany potocznie „małym kościołem”, ma znacznie starszą historię, niż sugeruje jego obecne wezwanie i funkcja.",
+      "Pierwotnie był to kościół greckokatolicki pw. Zaśnięcia Najświętszej Maryi Panny, wybudowany w latach 1828–1832, co świadczy o silnej obecności społeczności greckokatolickiej w Leżajsku w XIX wieku.",
+      "W 1874 roku świątynia uległa poważnemu zniszczeniu w wyniku pożaru. Po odbudowie nadano jej cechy stylu eklektycznego, łączącego różne elementy architektoniczne, co wyróżnia ją na tle innych obiektów sakralnych w mieście.",
+      "Z biegiem czasu zmieniła się zarówno jej funkcja, jak i przynależność wyznaniowa – obecnie jest kościołem rzymskokatolickim i pełni rolę świątyni filialnej.",
+      "Ciekawostką jest to, że dziś obiekt funkcjonuje głównie jako tzw. kościół szkolny, w którym odbywają się nabożeństwa i spotkania religijne dla dzieci oraz młodzieży.",
+      "Mimo niewielkich rozmiarów i mniej reprezentacyjnego charakteru w porównaniu do większych świątyń, kościół ten odgrywa ważną rolę w życiu lokalnej społeczności, szczególnie w edukacji religijnej młodego pokolenia."
     ]
   },
   { 
@@ -54,14 +65,19 @@ export const CITY_ELEMENTS = [
     code: "LZK-5POIU-1ZXC", 
     description: "Zabytkowy budynek stacji kolejowej oddany do użytku ok. 1900 r.", 
     icon: "🚉", 
-    image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&h=400&fit=crop", 
+    image: "/dworzec/nowy.jpg", 
     model: "dworzec",
-    oldImage: "https://images.unsplash.com/photo-1496674205429-924b32acd421?w=600&h=400&fit=crop&grayscale=true",
-    newImage: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&h=400&fit=crop",
+    oldImage: "/dworzec/stary.jpg",
+    newImage: "/dworzec/nowy.jpg",
     trivia: [
-      "Powstanie dworca włączanego w rozwój kolei galicyjskiej znacznie przyspieszyło rozwój miasta.",
-      "W architekturze można dostrzec typowy styl eleganckich stacji kolejowych Austro-Węgier.",
-      "W czasie obu wojen światowych dworzec odgrywał ważną funkcję logistyczno-transportową."
+      "Dworzec kolejowy w Leżajsk powstał pod koniec XIX wieku i został zaprojektowany w stylu galicyjskim. Ze względu na swoje walory architektoniczne jest objęty ochroną konserwatorską, co oznacza konieczność zachowania jego historycznego wyglądu.",
+      "W 2012 roku budynek przeszedł gruntowną modernizację, podczas której odnowiono elewację, dach oraz wnętrza, a także dostosowano obiekt do współczesnych standardów obsługi pasażerów.",
+      "Podczas remontu zadbano o detale historyczne – brakujące elementy oryginalnej posadzki sprowadzono aż z Afryki, aby jak najwierniej odtworzyć pierwotny wygląd wnętrza.",
+      "Na dachu dworca zamontowano baterie słoneczne służące do podgrzewania wody, co stanowi przykład wykorzystania nowoczesnych i ekologicznych rozwiązań.",
+      "Budynek został przystosowany do potrzeb osób z niepełnosprawnościami – wyposażono go m.in. w windę oraz specjalne oznaczenia dla osób niedowidzących.",
+      "Przez pewien czas po remoncie dworzec był krytykowany za brak kasy biletowej, co było dość nietypowe jak na nowo odnowiony obiekt.",
+      "Na terenie dworca działa punkt informacji turystycznej, dzięki któremu podróżni mogą uzyskać informacje o atrakcjach i zwiedzaniu miasta.",
+      "Mimo modernizacji i estetycznego wyglądu, ruch pasażerski na stacji jest stosunkowo niewielki – zatrzymuje się tam ograniczona liczba pociągów, co jest typowe dla mniejszych miejscowości."
     ]
   },
   { 
@@ -70,14 +86,18 @@ export const CITY_ELEMENTS = [
     code: "LZK-7RAT-9USZ", 
     description: "Historyczny ratusz będący sercem zabytkowego centrum miasta", 
     icon: "🏛️", 
-    image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&h=400&fit=crop", 
+    image: "/ratusz/nowy.jpg", 
     model: "ratusz",
-    oldImage: "https://images.unsplash.com/photo-1502010887375-3475871f3014?w=600&h=400&fit=crop&grayscale=true",
-    newImage: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&h=400&fit=crop",
+    oldImage: "/ratusz/stary.jpg",
+    newImage: "/ratusz/nowy.jpg",
     trivia: [
-      "Ratusz Leżajski znajdował się na Rynku już dawno, był jednak kilkukrotnie przebudowywany.",
-      "W podziemiach znajdowała się waga miejska i prawdopodobnie areszt dla rzezimieszków.",
-      "W ostatnich latach Ratusz przeszedł renowację przywracającą mu swój dawny blask."
+      "Ratusz w Leżajsku jest jednym z najbardziej charakterystycznych budynków w centrum miasta i symbolem tradycji samorządowej.",
+      "Obiekt powstał w XIX wieku i pierwotnie pełnił funkcję siedziby władz miejskich oraz centrum administracyjnego. Jego architektura łączy cechy klasycyzmu i elementy typowe dla budynków użyteczności publicznej tamtego okresu.",
+      "W ciągu swojej historii ratusz był kilkukrotnie przebudowywany i modernizowany, aby dostosować wnętrza do zmieniających się potrzeb administracji miejskiej oraz wymogów bezpieczeństwa.",
+      "W ratuszu zachowały się oryginalne detale dekoracyjne, takie jak zdobione schody i elementy stolarki, które przetrwały niemal niezmienione do dziś.",
+      "Obecnie ratusz pełni funkcję zarówno administracyjną, jak i reprezentacyjną – organizowane są tam oficjalne uroczystości miejskie, spotkania z mieszkańcami oraz wydarzenia kulturalne.",
+      "Budynek położony jest w sercu rynku, co czyni go punktem orientacyjnym i jednym z najczęściej fotografowanych zabytków Leżajska.",
+      "Dzięki swojej historii i zachowanym elementom architektonicznym ratusz jest nie tylko miejscem pracy władz miasta, ale także atrakcją turystyczną i świadectwem wielowiekowej tradycji miejskiej."
     ]
   },
 ];
