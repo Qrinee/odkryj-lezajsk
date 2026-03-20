@@ -2,18 +2,31 @@ export default function Hero({ inputCode, setInputCode, error, onSubmit, unlocke
   return (
     <div className="relative h-screen min-h-[600px]">
       
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         <img 
           src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop" 
           alt="Mountains"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover animate-ken-burns scale-105"
         />
         
-        <div className="absolute inset-0 bg-gradient-to-b from-sky-950/60 via-sky-900/40 to-sky-200" />
-
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-sky-950/70 via-sky-900/50 to-sky-400" />
+        
+        {/* Animated Bubbles Overlay */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden mix-blend-screen">
+           {[...Array(20)].map((_, i) => (
+              <div 
+                key={`bubble-${i}`} 
+                className="bubble" 
+                style={{ 
+                  left: `${Math.random() * 100}%`, 
+                  width: `${10 + Math.random() * 40}px`, 
+                  height: `${10 + Math.random() * 40}px`, 
+                  animationDuration: `${12 + Math.random() * 25}s`, 
+                  animationDelay: `${Math.random() * -20}s` 
+                }} 
+              />
+           ))}
+        </div>
       </div>
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-4">
@@ -40,17 +53,17 @@ export default function Hero({ inputCode, setInputCode, error, onSubmit, unlocke
         </p>
 
         <div className="w-full max-w-xl">
-          <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-3">
+          <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-4 relative z-20">
             <input
               type="text"
               value={inputCode}
               onChange={(e) => setInputCode(e.target.value)}
               placeholder="Wpisz kod z nakrętki..."
-              className="flex-1 px-6 py-4 text-lg rounded-2xl bg-white/95 backdrop-blur text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-cyan-400/30 shadow-xl"
+              className="flex-1 px-8 py-5 text-xl font-medium rounded-2xl bg-white/10 backdrop-blur-xl border border-white/40 text-white placeholder-white/80 focus:outline-none focus:ring-4 focus:ring-cyan-300/40 shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all"
             />
             <button
               type="submit"
-              className="px-10 py-4 text-lg font-bold bg-gradient-to-r from-cyan-500 to-sky-600 hover:from-cyan-400 hover:to-sky-500 text-white rounded-2xl transition-all hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/30"
+              className="px-10 py-5 text-xl font-bold bg-white text-sky-900 hover:bg-cyan-50 hover:text-sky-800 rounded-2xl transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] shadow-xl"
             >
               Odkryj
             </button>

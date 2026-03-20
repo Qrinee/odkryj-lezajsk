@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-outfit);
   
   /* Woda Leżajsk Inspired - Water/Mountain Theme 2026 */
   --color-water-deep: #0ea5e9;
@@ -278,4 +277,31 @@ button:hover {
 
 .animate-bounce-slow {
   animation: bounce-slow 1s ease-in-out infinite;
+}
+
+@keyframes ken-burns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15); }
+}
+
+.animate-ken-burns {
+  animation: ken-burns 30s ease-in-out infinite alternate;
+}
+
+@keyframes bubble-float {
+  0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-20vh) scale(1.2); opacity: 0; }
+}
+
+.bubble {
+  position: absolute;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.1));
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 50%;
+  animation: bubble-float linear infinite;
+  box-shadow: 0 0 15px rgba(255,255,255,0.3), inset 0 0 10px rgba(255,255,255,0.6);
+  backdrop-filter: blur(3px);
+  z-index: 10;
 }

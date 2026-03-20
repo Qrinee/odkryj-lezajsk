@@ -52,11 +52,11 @@ export default function Home() {
         totalElements={CITY_ELEMENTS.length}
       />
 
-      {/* <WaveDivider /> */}
+      <WaveDivider />
 
       <main className="relative bg-sky-50">
 
-        {/* <SectionTitle /> */}
+        <SectionTitle />
 
         <div className="mx-auto px-4" ref={cityRef}>
           <City3D
