@@ -22,6 +22,12 @@ export default function RouletteSpinner({
   const containerRef = useRef(null);
   const [spinSequence, setSpinSequence] = useState([]);
   const [translateX, setTranslateX] = useState(0);
+  const [isFastForwarding, setIsFastForwarding] = useState(false);
+  const timeoutIdRef = useRef(null);
+  const finishCallbackRef = useRef(null);
+
+  const targetPositionRef = useRef(0);
+  const [isFreezing, setIsFreezing] = useState(false);
 
   useEffect(() => {
     if (elementToUnlock && showRoulette) {
@@ -33,6 +39,8 @@ export default function RouletteSpinner({
     if (isSpinning) return;
 
     setIsSpinning(true);
+    setIsFastForwarding(false);
+    setIsFreezing(false);
     setWinner(null);
     setShowWinner(false);
     setTranslateX(0);
@@ -66,10 +74,13 @@ export default function RouletteSpinner({
         finalPosition = -13000;
       }
 
+      targetPositionRef.current = finalPosition;
       setTranslateX(finalPosition);
 
-      setTimeout(() => {
+      finishCallbackRef.current = () => {
         setIsSpinning(false);
+        setIsFastForwarding(false);
+        setIsFreezing(false);
         setWinner(sequence[winningIndex]);
 
         setTimeout(() => {
@@ -92,21 +103,61 @@ export default function RouletteSpinner({
             }
           }, 3500);
         }, 500);
+      };
 
+      timeoutIdRef.current = setTimeout(() => {
+        if (finishCallbackRef.current) finishCallbackRef.current();
       }, SPIN_DURATION_MS);
+
     }, 100);
   }, [isSpinning, unlockedElements, setIsSpinning, setWinner, setShowWinner, setShowRoulette, setUnlockedElements, setNewlyUnlocked, setShowUnlockAnimation, onUnlockComplete]);
+
+  const handleFastForward = () => {
+    if (isSpinning && !isFastForwarding && !isFreezing && containerRef.current) {
+      // 1. Zdobądź aktualną fizyczną pozycję kontenera w trakcie animacji
+      const style = window.getComputedStyle(containerRef.current);
+      let currentTx = 0;
+      if (style.transform && style.transform !== 'none') {
+        const matrix = new DOMMatrix(style.transform);
+        currentTx = matrix.m41;
+      }
+
+      // 2. Zamrożenie w miejscu obecnej pozycji bez animacji
+      setIsFreezing(true);
+      setTranslateX(currentTx);
+
+      if (timeoutIdRef.current) {
+        clearTimeout(timeoutIdRef.current);
+      }
+
+      // 3. Po zaktualizowaniu klatki, kontynuuj animację do końca 
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsFreezing(false);
+          setIsFastForwarding(true);
+          setTranslateX(targetPositionRef.current);
+          
+          timeoutIdRef.current = setTimeout(() => {
+            if (finishCallbackRef.current) finishCallbackRef.current();
+          }, 1200);
+        });
+      });
+    }
+  };
 
   if (!showRoulette) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-in fade-in duration-300">
+    <div 
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-in fade-in duration-300"
+      onClick={handleFastForward}
+    >
       <h2 className="text-4xl font-extrabold tracking-tight text-white mb-12 drop-shadow-lg uppercase">
         Losowanie elementu miasta...
       </h2>
 
       <div className="flex flex-col items-center justify-center w-full max-w-6xl mx-auto gap-8">
-        <div className="relative w-full h-56 bg-gradient-to-b from-gray-800 to-gray-900 border-2 border-gray-700/50 rounded-2xl overflow-hidden ">
+        <div className="relative w-full h-56 bg-gradient-to-b from-gray-800 to-gray-900 border-2 border-gray-700/50 rounded-2xl overflow-hidden cursor-pointer">
           <div className="absolute top-0 bottom-0 left-1/2 w-1.5 bg-blue-400 z-10 -translate-x-1/2"></div>
           <div className="absolute top-0 left-1/2 w-5 h-5 bg-blue-400 z-10 -translate-x-1/2 rotate-45 -translate-y-2"></div>
           <div className="absolute bottom-0 left-1/2 w-5 h-5 bg-blue-400 z-10 -translate-x-1/2 rotate-45 translate-y-2"></div>
@@ -116,7 +167,7 @@ export default function RouletteSpinner({
             className="flex items-center h-full px-4"
             style={{
               transform: `translateX(${translateX}px)`,
-              transition: (isSpinning && translateX !== 0) ? `transform ${SPIN_DURATION_MS}ms cubic-bezier(0.1, 0.9, 0.2, 1)` : "none",
+              transition: (isSpinning && translateX !== 0 && !isFreezing) ? `transform ${isFastForwarding ? 1200 : SPIN_DURATION_MS}ms cubic-bezier(0.1, 0.9, 0.2, 1)` : "none",
               gap: '16px',
               width: 'max-content'
             }}
@@ -141,6 +192,11 @@ export default function RouletteSpinner({
           <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-gray-900 via-gray-900/80 to-transparent z-10 pointer-events-none"></div>
           <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-gray-900 via-gray-900/80 to-transparent z-10 pointer-events-none"></div>
         </div>
+        {isSpinning && (
+          <p className={`text-sm transition-colors duration-300 ${isFastForwarding ? 'text-sky-400 font-medium' : 'text-white/50 animate-pulse'}`}>
+            {isFastForwarding ? 'Losowanie przyspieszone 🚀' : 'Kliknij w ekran, aby przyspieszyć losowanie'}
+          </p>
+        )}
       </div>
     </div>
   );
