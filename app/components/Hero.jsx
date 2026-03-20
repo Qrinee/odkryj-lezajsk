@@ -1,4 +1,20 @@
+import { useMemo } from "react";
+
 export default function Hero({ inputCode, setInputCode, error, onSubmit, unlockedCount, totalElements }) {
+  const bubbles = useMemo(() => {
+    return [...Array(20)].map((_, i) => {
+      const size = 10 + Math.random() * 40;
+      return {
+        id: i,
+        left: `${Math.random() * 100}%`,
+        width: `${size}px`,
+        height: `${size}px`,
+        animationDuration: `${12 + Math.random() * 25}s`,
+        animationDelay: `${Math.random() * -20}s`
+      };
+    });
+  }, []);
+
   return (
     <div className="relative h-screen min-h-[600px]">
       
@@ -13,16 +29,16 @@ export default function Hero({ inputCode, setInputCode, error, onSubmit, unlocke
         
         {/* Animated Bubbles Overlay */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden mix-blend-screen">
-           {[...Array(20)].map((_, i) => (
+           {bubbles.map((bubble) => (
               <div 
-                key={`bubble-${i}`} 
+                key={`bubble-${bubble.id}`} 
                 className="bubble" 
                 style={{ 
-                  left: `${Math.random() * 100}%`, 
-                  width: `${10 + Math.random() * 40}px`, 
-                  height: `${10 + Math.random() * 40}px`, 
-                  animationDuration: `${12 + Math.random() * 25}s`, 
-                  animationDelay: `${Math.random() * -20}s` 
+                  left: bubble.left, 
+                  width: bubble.width, 
+                  height: bubble.height, 
+                  animationDuration: bubble.animationDuration, 
+                  animationDelay: bubble.animationDelay 
                 }} 
               />
            ))}
