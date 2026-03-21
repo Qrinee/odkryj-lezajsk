@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useCallback } from "react";
 import { useCityGame } from "./hooks/useCityGame";
 import City3D from "./components/City3D";
 import Hero from "./components/Hero";
@@ -10,6 +11,7 @@ import ImageBanner from "./components/ImageBanner";
 import WaterInfoSection from "./components/WaterInfoSection";
 import Footer from "./components/Footer";
 import Roulette from "./components/Roulette";
+import BuildingPopup from "./components/BuildingPopup";
 import { CITY_ELEMENTS } from "./data/cityData";
 
 export default function Home() {
@@ -40,6 +42,15 @@ export default function Home() {
     handleUnlockComplete
   } = useCityGame(CITY_ELEMENTS);
 
+  const [selectedElement, setSelectedElement] = useState(null);
+
+  const handleOpenDetails = useCallback((element) => {
+    setSelectedElement(element);
+    if (!unlockedElements.includes(element.code)) {
+      setInputCode(element.code);
+    }
+  }, [unlockedElements, setInputCode]);
+
   return (
     <div className="min-h-screen relative overflow-hidden">
 
@@ -63,11 +74,7 @@ export default function Home() {
             elements={CITY_ELEMENTS}
             unlockedElements={unlockedElements}
             autoOpenElement={autoOpenElement}
-            onElementClick={(element) => {
-              if (!isUnlocked(element.code)) {
-                setInputCode(element.code);
-              }
-            }}
+            onBuildingClick={handleOpenDetails}
           />
         </div>
 
@@ -77,6 +84,7 @@ export default function Home() {
           showUnlockAnimation={showUnlockAnimation}
           newlyUnlocked={newlyUnlocked}
           onElementClick={handleElementClick}
+          onOpenDetails={handleOpenDetails}
         />
 
         <ImageBanner />
@@ -105,6 +113,14 @@ export default function Home() {
         elementToUnlock={elementToUnlock}
         onUnlockComplete={handleUnlockComplete}
       />
+
+      {selectedElement && (
+        <BuildingPopup
+          element={selectedElement}
+          isUnlocked={isUnlocked(selectedElement.code)}
+          onClose={() => setSelectedElement(null)}
+        />
+      )}
 
     </div>
   );

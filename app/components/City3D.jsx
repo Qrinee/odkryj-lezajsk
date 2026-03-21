@@ -4,28 +4,22 @@ import { useState, useCallback, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 
 import Scene from "./city3d/Scene";
-import BuildingPopup from "./BuildingPopup";
 
-export default function City3D({ elements, unlockedElements, onElementClick, autoOpenElement }) {
+export default function City3D({ elements, unlockedElements, onBuildingClick, autoOpenElement }) {
   const [zoomTarget, setZoomTarget] = useState(null);
-  const [selectedElement, setSelectedElement] = useState(null);
 
   const handleBuildingClick = useCallback((element) => {
     setZoomTarget(element.id);
-    setSelectedElement(element);
-  }, []);
-
-  const handleClosePopup = useCallback(() => {
-    setSelectedElement(null);
-  }, []);
+    if (onBuildingClick) {
+      onBuildingClick(element);
+    }
+  }, [onBuildingClick]);
 
   useEffect(() => {
     if (autoOpenElement) {
       handleBuildingClick(autoOpenElement);
     }
   }, [autoOpenElement, handleBuildingClick]);
-
-  const isElementUnlocked = (code) => unlockedElements.includes(code);
 
   return (
     <div className="w-full h-[600px] rounded-3xl overflow-hidden shadow-2xl">
@@ -41,14 +35,6 @@ export default function City3D({ elements, unlockedElements, onElementClick, aut
           onBuildingClick={handleBuildingClick}
         />
       </Canvas>
-
-      {selectedElement && (
-        <BuildingPopup
-          element={selectedElement}
-          isUnlocked={isElementUnlocked(selectedElement.code)}
-          onClose={handleClosePopup}
-        />
-      )}
     </div>
   );
 }
