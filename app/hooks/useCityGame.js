@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 
 export function useCityGame(cityElements) {
-  const [inputCode, setInputCode] = useState("");
+  const [inputCode, setInputCode] = useState("LZK-7RAT");
   const [unlockedElements, setUnlockedElements] = useState([]);
   const [error, setError] = useState("");
   const [showUnlockAnimation, setShowUnlockAnimation] = useState(false);
