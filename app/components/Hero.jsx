@@ -111,7 +111,7 @@ export default function Hero({ inputCode, setInputCode, error, onSubmit, unlocke
               className="px-4 py-5 cursor-pointer text-2xl bg-white/10 backdrop-blur border border-white/30 text-white hover:bg-white/20 rounded-2xl transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] shadow-xl flex items-center justify-center"
               title="Zeskanuj kod aparatem"
             >
-              <img src='/aparat.webp' className="w-full" />
+              <img src='/aparat.webp' className="w-10" />
             </button>
           </form>
           {error && (

@@ -1,6 +1,5 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import ServiceWorkerRegistration from "./components/ServiceWorkerRegistration";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -36,7 +35,6 @@ export default function RootLayout({ children }) {
         <meta name="apple-mobile-web-app-title" content="Odkryj Leżajsk" />
       </head>
       <body className="min-h-full flex flex-col">
-        <ServiceWorkerRegistration />
         {children}
       </body>
     </html>
