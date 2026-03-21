@@ -95,7 +95,6 @@ export default function Hero({ inputCode, setInputCode, error, onSubmit, unlocke
             <input
               type="text"
               value={inputCode}
-              defaultValue={'LZK-7RAT'}
               onChange={(e) => setInputCode(e.target.value)}
               placeholder="Wpisz kod z nakrętki..."
               className="flex-1 px-8 py-5 text-xl font-medium rounded-2xl bg-white/10 backdrop-blur-xl border border-white/40 text-white placeholder-white/80 focus:outline-none focus:ring-4 focus:ring-cyan-300/40 shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all"
