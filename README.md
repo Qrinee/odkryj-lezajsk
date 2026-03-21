@@ -1,13 +1,11 @@
 # Odkryj Leżajsk - Zbierz Miasto
 
-Interaktywna aplikacja webowa do eksploracji zabytków miasta Leżajsk. Użytkownicy mogą odkrywać kolejne budynki wpisując kody z nakrętek wody Leżajsk.
+Interaktywna aplikacja webowa do eksploracji zabytków miasta Leżajsk. Użytkownicy mogą odkrywać kolejne budynki skanując kody z nakrętek wody Leżajsk.
 
-## Funkcje
+## Funkcjeą
 
 - 🏛️ **Interaktywna mapa 3D** - zbudowana przy użyciu Three.js i React Three Fiber
-- 🏆 **Zbieranie budynków** - wpisz kod z nakrętki, aby odblokować kolejne zabytki
-- 🎰 **Ruletka nagród** - losuj nagrody po odblokowaniu budynków
-- 📱 **PWA** - możliwość instalacji na urządzeniach mobilnych
+- 🏆 **Zbieranie budynków** - zeskanuj kod z nakrętki, aby odblokować kolejne zabytki
 
 ## Zbudowane z
 
@@ -49,18 +47,6 @@ npm run dev
 
 Aplikacja będzie dostępna pod adresem [http://localhost:3000](http://localhost:3000)
 
-### Budowanie produkcyjne
-
-```bash
-npm run build
-```
-
-### Uruchomienie produkcyjne
-
-```bash
-npm start
-```
-
 ## Struktura projektu
 
 ```
@@ -85,31 +71,7 @@ odkryj-lezajsk/
 
 ## Jak grać
 
-1. Wpisz kod z nakrętki wody Leżajsk w polu na stronie głównej
-2. Po poprawnym kodzie, budynek zostanie odblokowany na mapie 3D
+1. Zeskanuj kod spod nakrętki wody Leżajsk w polu na stronie głównej
+2. Po wprowadzeniu poprawnego kodu, budynek zostanie odblokowany na mapie 3D
 3. Kliknij na budynek, aby zobaczyć szczegóły i ciekawostki
-4. Po odblokowaniu wszystkich budynków weź udział w ruletce nagród
-
-## Rozwiązywanie problemów
-
-### Problem z cache przeglądarki
-
-Jeśli aplikacja nie ładuje się poprawnie:
-
-1. Otwórz DevTools (F12)
-2. Idź do zakładki **Application**
-3. W sekcji **Storage** kliknij **Clear site data**
-4. Odśwież stronę (Ctrl+F5)
-
-### Problem z .next
-
-Jeśli występują błędy:
-
-```bash
-rm -rf .next
-npm run dev
-```
-
-## Licencja
-
-MIT
+4. Po odblokowaniu wszystkich budynków odbierz nagrodę
