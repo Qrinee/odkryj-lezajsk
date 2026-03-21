@@ -11,7 +11,6 @@ import ImageBanner from "./components/ImageBanner";
 import WaterInfoSection from "./components/WaterInfoSection";
 import Footer from "./components/Footer";
 import Roulette from "./components/Roulette";
-import OnboardingModal from "./components/OnboardingModal";
 import BuildingPopup from "./components/BuildingPopup";
 import { CITY_ELEMENTS } from "./data/cityData";
 
@@ -58,10 +57,7 @@ export default function Home() {
   return (
     <div className="min-h-screen relative overflow-hidden">
       
-      <OnboardingModal 
-        isOpen={showOnboarding} 
-        onStart={() => setShowOnboarding(false)} 
-      />
+
 
       <Hero
         inputCode={inputCode}
