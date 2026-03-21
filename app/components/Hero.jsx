@@ -7,9 +7,7 @@ export default function Hero({ inputCode, setInputCode, error, onSubmit, unlocke
   const handleScanSuccess = (decodedText) => {
     setIsScannerOpen(false);
     setInputCode(decodedText);
-    setTimeout(() => {
-      onSubmit({ preventDefault: () => {} });
-    }, 100);
+    onSubmit(null, decodedText);
   };
   const bubbles = useMemo(() => {
     return [...Array(20)].map((_, i) => {

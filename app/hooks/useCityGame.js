@@ -23,11 +23,12 @@ export function useCityGame(cityElements) {
     setAutoOpenElement(element);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, directCode = null) => {
     if (e && e.preventDefault) e.preventDefault();
     setError("");
 
-    const normalizedInput = inputCode.trim().toUpperCase();
+    const codeToProcess = directCode !== null ? directCode : inputCode;
+    const normalizedInput = codeToProcess.trim().toUpperCase();
     
     if (unlockedElements.includes(normalizedInput)) {
       setError("Ten kod został już wykorzystany!");
