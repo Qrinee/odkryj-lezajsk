@@ -4,11 +4,13 @@ import { useRef, useEffect } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { BUILDINGS_CONFIG } from "./buildingsConfig";
-
+
+
 const BUILDING_POSITIONS = BUILDINGS_CONFIG.map((b) => ({
   position: b.position,
 }));
-
+
+
 export default function CameraController({ zoomTarget, elements }) {
   const { camera } = useThree();
   const originalPosition = useRef(null);
@@ -28,8 +30,6 @@ export default function CameraController({ zoomTarget, elements }) {
       originalPosition.current = camera.position.clone();
 
       const targetPos = new THREE.Vector3(...targetConfig.position);
-      const direction = targetPos.clone().normalize();
-      
       animationProgress.current = 0;
       isAnimating.current = true;
     }

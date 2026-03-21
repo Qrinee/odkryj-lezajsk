@@ -27,7 +27,6 @@ export default function ScannerModal({ isOpen, onClose, onScanSuccess }) {
             }
           },
           (errorMessage) => {
-            // Można zignorować puste wywołania braku QR
           }
         );
       } catch (err) {

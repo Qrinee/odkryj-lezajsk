@@ -114,7 +114,6 @@ export default function RouletteSpinner({
 
   const handleFastForward = () => {
     if (isSpinning && !isFastForwarding && !isFreezing && containerRef.current) {
-      // 1. Zdobądź aktualną fizyczną pozycję kontenera w trakcie animacji
       const style = window.getComputedStyle(containerRef.current);
       let currentTx = 0;
       if (style.transform && style.transform !== 'none') {
@@ -122,7 +121,6 @@ export default function RouletteSpinner({
         currentTx = matrix.m41;
       }
 
-      // 2. Zamrożenie w miejscu obecnej pozycji bez animacji
       setIsFreezing(true);
       setTranslateX(currentTx);
 
@@ -130,7 +128,6 @@ export default function RouletteSpinner({
         clearTimeout(timeoutIdRef.current);
       }
 
-      // 3. Po zaktualizowaniu klatki, kontynuuj animację do końca 
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           setIsFreezing(false);

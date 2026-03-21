@@ -2,8 +2,6 @@
 
 @theme {
   --font-sans: var(--font-outfit);
-  
-  /* Woda Leżajsk Inspired - Water/Mountain Theme 2026 */
   --color-water-deep: #0ea5e9;
   --color-water-light: #38bdf8;
   --color-water-lighter: #7dd3fc;
@@ -25,7 +23,6 @@ body {
   min-height: 100vh;
 }
 
-/* Water gradient background */
 .water-bg {
   background: linear-gradient(
     180deg,
@@ -36,7 +33,6 @@ body {
   );
 }
 
-/* Glass effect with water theme */
 .glass-water {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(20px);
@@ -70,7 +66,6 @@ body {
   border-color: rgba(14, 165, 233, 0.3);
 }
 
-/* Water gradient text */
 .gradient-text-water {
   background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 50%, #38bdf8 100%);
   -webkit-background-clip: text;
@@ -78,7 +73,6 @@ body {
   background-clip: text;
 }
 
-/* Water glow effects */
 .glow-water {
   box-shadow: 0 0 40px rgba(14, 165, 233, 0.25);
 }
@@ -87,7 +81,6 @@ body {
   box-shadow: 0 0 30px rgba(14, 165, 233, 0.4);
 }
 
-/* Mountain wave decoration */
 .wave-decoration {
   position: relative;
 }
@@ -103,7 +96,6 @@ body {
   pointer-events: none;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -121,7 +113,6 @@ body {
   background: var(--color-water-deep);
 }
 
-/* Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -151,19 +142,16 @@ body {
   animation: pulse-water 2s ease-in-out infinite;
 }
 
-/* Input focus styles */
 input:focus {
   outline: none;
   border-color: var(--color-water-deep);
   box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
 }
 
-/* Button hover */
 button:hover {
   box-shadow: 0 0 30px rgba(14, 165, 233, 0.35);
 }
 
-/* Mountain silhouette background */
 .mountain-bg {
   position: relative;
 }
@@ -183,7 +171,6 @@ button:hover {
   pointer-events: none;
 }
 
-/* Lock shake animation */
 @keyframes lock-shake {
   0%, 100% { transform: translateX(0) rotate(0deg); }
   10% { transform: translateX(-3px) rotate(-5deg); }
@@ -201,7 +188,6 @@ button:hover {
   animation: lock-shake 0.8s ease-in-out;
 }
 
-/* Lock open animation */
 @keyframes lock-open {
   0% { transform: rotate(0deg); }
   50% { transform: rotate(-20deg) scale(1.1); }
@@ -212,7 +198,6 @@ button:hover {
   animation: lock-open 0.8s ease-in-out forwards;
 }
 
-/* Label appear animation */
 @keyframes label-appear {
   0% { transform: scale(0) translateY(10px); opacity: 0; }
   50% { transform: scale(1.1) translateY(0); }
@@ -223,7 +208,6 @@ button:hover {
   animation: label-appear 0.5s ease-out forwards;
 }
 
-/* City Loader Animations */
 @keyframes bounce-slow {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
@@ -233,7 +217,6 @@ button:hover {
   animation: bounce-slow 2s ease-in-out infinite;
 }
 
-/* Lottery slot machine animations */
 @keyframes slot-scroll {
   0% { transform: translateY(0); }
   100% { transform: translateY(-400%); }
