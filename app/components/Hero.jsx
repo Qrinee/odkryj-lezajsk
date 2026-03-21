@@ -1,8 +1,18 @@
 import { useMemo, useState } from "react";
 import ScannerModal from "./ScannerModal";
 
-export default function Hero({ inputCode, setInputCode, error, onSubmit, unlockedCount, totalElements }) {
+export default function Hero({ inputCode, setInputCode, error, onSubmit, unlockedCount, totalElements, isNightMode, toggleNightMode }) {
   const [isScannerOpen, setIsScannerOpen] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+
+  const handleLogoClick = () => {
+    const newCount = clickCount + 1;
+    setClickCount(newCount);
+    if (newCount === 3) {
+      toggleNightMode();
+      setClickCount(0);
+    }
+  };
 
   const handleScanSuccess = (decodedText) => {
     setIsScannerOpen(false);
@@ -25,39 +35,43 @@ export default function Hero({ inputCode, setInputCode, error, onSubmit, unlocke
 
   return (
     <div className="relative h-screen min-h-[600px]">
-      
+
       <div className="absolute inset-0 overflow-hidden">
-        <img 
-          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop" 
+        <img
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop"
           alt="Mountains"
           className="w-full h-full object-cover animate-ken-burns scale-105"
         />
-        
-        <div className="absolute inset-0 bg-gradient-to-b from-sky-950/70 via-sky-900/50 to-sky-400" />
-        
+
+        <div className={`absolute inset-0 transition-colors duration-1000 ${isNightMode ? 'bg-gradient-to-b from-slate-950/90 via-slate-900/80 to-slate-800/80' : 'bg-gradient-to-b from-sky-950/70 via-sky-900/50 to-sky-400'}`} />
+
         {/* Animated Bubbles Overlay */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden mix-blend-screen">
-           {bubbles.map((bubble) => (
-              <div 
-                key={`bubble-${bubble.id}`} 
-                className="bubble" 
-                style={{ 
-                  left: bubble.left, 
-                  width: bubble.width, 
-                  height: bubble.height, 
-                  animationDuration: bubble.animationDuration, 
-                  animationDelay: bubble.animationDelay 
-                }} 
-              />
-           ))}
+          {bubbles.map((bubble) => (
+            <div
+              key={`bubble-${bubble.id}`}
+              className="bubble"
+              style={{
+                left: bubble.left,
+                width: bubble.width,
+                height: bubble.height,
+                animationDuration: bubble.animationDuration,
+                animationDelay: bubble.animationDelay
+              }}
+            />
+          ))}
         </div>
       </div>
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-4">
-        
+
         <div className="mb-8">
-          <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-4xl shadow-2xl">
-            💧
+          <div 
+            onClick={handleLogoClick}
+            className={`w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-4xl shadow-2xl cursor-pointer transition-transform active:scale-95 hover:scale-105 ${clickCount > 0 ? 'animate-pulse' : ''}`}
+            title="Tajemnicza kropla..."
+          >
+            {isNightMode ? "🌙" : "💧"}
           </div>
         </div>
 
@@ -87,17 +101,17 @@ export default function Hero({ inputCode, setInputCode, error, onSubmit, unlocke
             />
             <button
               type="submit"
-              className="px-10 py-5 text-xl font-bold bg-white text-sky-900 hover:bg-cyan-50 hover:text-sky-800 rounded-2xl transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] shadow-xl"
+              className="px-10 py-5 text-xl font-bold bg-white text-sky-900 hover:bg-cyan-50 hover:text-sky-800 rounded-2xl transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] shadow-xl cursor-pointer"
             >
               Odkryj
             </button>
             <button
               type="button"
               onClick={() => setIsScannerOpen(true)}
-              className="px-6 py-5 text-2xl bg-white/10 backdrop-blur border border-white/30 text-white hover:bg-white/20 rounded-2xl transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] shadow-xl flex items-center justify-center"
+              className="px-4 py-5 cursor-pointer text-2xl bg-white/10 backdrop-blur border border-white/30 text-white hover:bg-white/20 rounded-2xl transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] shadow-xl flex items-center justify-center"
               title="Zeskanuj kod aparatem"
             >
-              📸
+              <img src='/aparat.webp' className="w-full" />
             </button>
           </form>
           {error && (
@@ -124,10 +138,10 @@ export default function Hero({ inputCode, setInputCode, error, onSubmit, unlocke
         </div>
       </div>
 
-      <ScannerModal 
-        isOpen={isScannerOpen} 
-        onClose={() => setIsScannerOpen(false)} 
-        onScanSuccess={handleScanSuccess} 
+      <ScannerModal
+        isOpen={isScannerOpen}
+        onClose={() => setIsScannerOpen(false)}
+        onScanSuccess={handleScanSuccess}
       />
     </div>
   );

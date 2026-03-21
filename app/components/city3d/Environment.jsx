@@ -4,6 +4,7 @@ import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { BUILDINGS_CONFIG } from "./buildingsConfig";
+import { Stars } from "@react-three/drei";
 
 
 export function Terrain() {
@@ -281,28 +282,38 @@ function HappyRocks() {
 }
 
 
-export default function Environment() {
+export default function Environment({ isNightMode }) {
   return (
     <>
 
-      <color attach="background" args={['#87ceeb']} />
+      <color attach="background" args={[isNightMode ? '#0f172a' : '#87ceeb']} />
 
-      <fog attach="fog" args={['#85ec6bff', 30, 180]} />
+      <fog attach="fog" args={[isNightMode ? '#0f172a' : '#85ec6bff', 30, 180]} />
 
-      <HappySun />
+      {isNightMode && <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />}
 
-      <HappyClouds />
+      {!isNightMode && <HappySun />}
+      
+      {isNightMode && (
+        <mesh position={[40, 50, -40]}>
+          <sphereGeometry args={[4, 32, 32]} />
+          <meshBasicMaterial color="#e2e8f0" />
+          <pointLight intensity={0.5} color="#e2e8f0" distance={200} />
+        </mesh>
+      )}
+
+      {!isNightMode && <HappyClouds />}
 
       <HappyTrees />
 
       <HappyRocks />
 
-      <ambientLight intensity={0.4} />
+      <ambientLight intensity={isNightMode ? 0.05 : 0.4} />
       <directionalLight
         position={[30, 60, 20]}
-        intensity={1.2}
+        intensity={isNightMode ? 0.1 : 1.2}
         castShadow
-        color="#fff5e6"
+        color={isNightMode ? "#60a5fa" : "#fff5e6"}
         shadow-bias={-0.0005}
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
@@ -312,12 +323,12 @@ export default function Environment() {
         shadow-camera-top={60}
         shadow-camera-bottom={-60}
       />
-      <pointLight position={[0, 15, 0]} intensity={0.3} color="#ffe4b5" />
+      <pointLight position={[0, 15, 0]} intensity={isNightMode ? 1.5 : 0.3} color={isNightMode ? "#fbbf24" : "#ffe4b5"} />
 
       <hemisphereLight
-        color="#ffffff"
-        groundColor="#90EE90"
-        intensity={0.3}
+        color={isNightMode ? "#1e293b" : "#ffffff"}
+        groundColor={isNightMode ? "#020617" : "#90EE90"}
+        intensity={isNightMode ? 0.3 : 0.3}
       />
 
       <Terrain />

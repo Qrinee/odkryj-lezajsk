@@ -13,6 +13,9 @@ export function useCityGame(cityElements) {
   const [showWinner, setShowWinner] = useState(false);
   const [elementToUnlock, setElementToUnlock] = useState(null);
   const [autoOpenElement, setAutoOpenElement] = useState(null);
+  
+  const [isNightMode, setIsNightMode] = useState(false);
+  const toggleNightMode = () => setIsNightMode(prev => !prev);
    
   const cityRef = useRef(null);
 
@@ -77,6 +80,9 @@ export function useCityGame(cityElements) {
     handleSubmit,
     isUnlocked,
     handleElementClick,
-    handleUnlockComplete
+    handleElementClick,
+    handleUnlockComplete,
+    isNightMode,
+    toggleNightMode
   };
 }

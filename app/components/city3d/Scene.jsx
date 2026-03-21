@@ -6,12 +6,12 @@ import CameraController from "./CameraController";
 import Environment from "./Environment";
 import { BUILDINGS_CONFIG } from "./buildingsConfig";
 
-export default function Scene({ elements, unlockedElements, zoomTarget, onBuildingClick }) {
+export default function Scene({ elements, unlockedElements, zoomTarget, onBuildingClick, isNightMode }) {
   const isUnlocked = (code) => unlockedElements.includes(code);
 
   return (
     <>
-      <Environment />
+      <Environment isNightMode={isNightMode} />
       <CameraController zoomTarget={zoomTarget} elements={elements} />
 
       {elements.map((element, index) => {

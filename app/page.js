@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useCityGame } from "./hooks/useCityGame";
 import City3D from "./components/City3D";
 import Hero from "./components/Hero";
@@ -10,9 +11,11 @@ import ImageBanner from "./components/ImageBanner";
 import WaterInfoSection from "./components/WaterInfoSection";
 import Footer from "./components/Footer";
 import Roulette from "./components/Roulette";
+import OnboardingModal from "./components/OnboardingModal";
 import { CITY_ELEMENTS } from "./data/cityData";
 
 export default function Home() {
+  const [showOnboarding, setShowOnboarding] = useState(true);
   const {
     cityRef,
     inputCode,
@@ -37,11 +40,18 @@ export default function Home() {
     handleSubmit,
     isUnlocked,
     handleElementClick,
-    handleUnlockComplete
+    handleUnlockComplete,
+    isNightMode,
+    toggleNightMode
   } = useCityGame(CITY_ELEMENTS);
 
   return (
     <div className="min-h-screen relative overflow-hidden">
+      
+      <OnboardingModal 
+        isOpen={showOnboarding} 
+        onStart={() => setShowOnboarding(false)} 
+      />
 
       <Hero
         inputCode={inputCode}
@@ -50,11 +60,13 @@ export default function Home() {
         onSubmit={handleSubmit}
         unlockedCount={unlockedElements.length}
         totalElements={CITY_ELEMENTS.length}
+        isNightMode={isNightMode}
+        toggleNightMode={toggleNightMode}
       />
 
       <WaveDivider />
 
-      <main className="relative bg-sky-50">
+      <main className={`relative transition-colors duration-1000 ${isNightMode ? 'bg-slate-900' : 'bg-sky-50'}`}>
 
         <SectionTitle />
 
@@ -68,6 +80,7 @@ export default function Home() {
                 setInputCode(element.code);
               }
             }}
+            isNightMode={isNightMode}
           />
         </div>
 
