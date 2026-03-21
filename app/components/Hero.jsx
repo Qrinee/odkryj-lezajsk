@@ -1,6 +1,16 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import ScannerModal from "./ScannerModal";
 
 export default function Hero({ inputCode, setInputCode, error, onSubmit, unlockedCount, totalElements }) {
+  const [isScannerOpen, setIsScannerOpen] = useState(false);
+
+  const handleScanSuccess = (decodedText) => {
+    setIsScannerOpen(false);
+    setInputCode(decodedText);
+    setTimeout(() => {
+      onSubmit({ preventDefault: () => {} });
+    }, 100);
+  };
   const bubbles = useMemo(() => {
     return [...Array(20)].map((_, i) => {
       const size = 10 + Math.random() * 40;
@@ -83,6 +93,14 @@ export default function Hero({ inputCode, setInputCode, error, onSubmit, unlocke
             >
               Odkryj
             </button>
+            <button
+              type="button"
+              onClick={() => setIsScannerOpen(true)}
+              className="px-6 py-5 text-2xl bg-white/10 backdrop-blur border border-white/30 text-white hover:bg-white/20 rounded-2xl transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] shadow-xl flex items-center justify-center"
+              title="Zeskanuj kod aparatem"
+            >
+              📸
+            </button>
           </form>
           {error && (
             <p className="mt-3 text-center text-rose-300 font-medium animate-shake">
@@ -107,6 +125,12 @@ export default function Hero({ inputCode, setInputCode, error, onSubmit, unlocke
           <div className="w-1.5 h-3 bg-white/50 rounded-full animate-pulse" />
         </div>
       </div>
+
+      <ScannerModal 
+        isOpen={isScannerOpen} 
+        onClose={() => setIsScannerOpen(false)} 
+        onScanSuccess={handleScanSuccess} 
+      />
     </div>
   );
 }
