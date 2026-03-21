@@ -3,7 +3,7 @@ export const CITY_ELEMENTS = [
   { 
     id: 1, 
     name: "Muzeum", 
-    code: "LZK-2YZA-4BCD", 
+    code: "LZK-2YZA", 
     description: "Muzeum Ziemi Leżajskiej wpisane w mury dawnego dworu", 
     icon: "🏛️", 
     image: "/muzeum/nowe.jpg", 
@@ -23,7 +23,7 @@ export const CITY_ELEMENTS = [
   { 
     id: 2, 
     name: "Klasztor", 
-    code: "LZK-3KLA-5SZT", 
+    code: "LZK-3KLA", 
     description: "Zespół klasztorny Ojców Bernardynów i Bazylika Zwiastowania NMP", 
     icon: "⛪", 
     image: "/klasztor/nowy.jpg", 
@@ -43,7 +43,7 @@ export const CITY_ELEMENTS = [
   { 
     id: 3, 
     name: "Kościół", 
-    code: "LZK-4KOS-6CIOL", 
+    code: "LZK-4KOS", 
     description: "Kościół filialny pw. Jezusa Miłosiernego", 
     icon: "⛪", 
     image: "/Kościół Pana Jezusa Miłosiernego/nowy.jpg", 
@@ -62,7 +62,7 @@ export const CITY_ELEMENTS = [
   { 
     id: 4, 
     name: "Dworzec", 
-    code: "LZK-5POIU-1ZXC", 
+    code: "LZK-5POIU", 
     description: "Zabytkowy budynek stacji kolejowej oddany do użytku ok. 1900 r.", 
     icon: "🚉", 
     image: "/dworzec/nowy.jpg", 
@@ -83,7 +83,7 @@ export const CITY_ELEMENTS = [
   { 
     id: 5, 
     name: "Ratusz", 
-    code: "LZK-7RAT-9USZ", 
+    code: "LZK-7RAT", 
     description: "Historyczny ratusz będący sercem zabytkowego centrum miasta", 
     icon: "🏛️", 
     image: "/ratusz/nowy.jpg", 
@@ -101,7 +101,8 @@ export const CITY_ELEMENTS = [
     ]
   },
 ];
-
+
+
 export const ROULETTE_ITEMS = [
   { id: 1, name: "Muzeum",  color: "bg-amber-500", text: "text-amber-100", originalElement: CITY_ELEMENTS[0] },
   { id: 2, name: "Klasztor", color: "bg-emerald-500", text: "text-emerald-100", originalElement: CITY_ELEMENTS[1] },
