@@ -2,7 +2,7 @@
 
 Interaktywna aplikacja webowa do eksploracji zabytków miasta Leżajsk. Użytkownicy mogą odkrywać kolejne budynki skanując kody z nakrętek wody Leżajsk.
 
-## Funkcjeą
+## Funkcje
 
 - 🏛️ **Interaktywna mapa 3D** - zbudowana przy użyciu Three.js i React Three Fiber
 - 🏆 **Zbieranie budynków** - zeskanuj kod z nakrętki, aby odblokować kolejne zabytki
