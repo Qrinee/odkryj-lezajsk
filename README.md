@@ -7,7 +7,6 @@ Interaktywna aplikacja webowa do eksploracji zabytków miasta Leżajsk. Użytkow
 - 🏛️ **Interaktywna mapa 3D** - zbudowana przy użyciu Three.js i React Three Fiber
 - 🏆 **Zbieranie budynków** - wpisz kod z nakrętki, aby odblokować kolejne zabytki
 - 🎰 **Ruletka nagród** - losuj nagrody po odblokowaniu budynków
-- 🌙 **Tryb nocny** - przełączaj między trybem dziennym i nocnym
 - 📱 **PWA** - możliwość instalacji na urządzeniach mobilnych
 
 ## Zbudowane z
