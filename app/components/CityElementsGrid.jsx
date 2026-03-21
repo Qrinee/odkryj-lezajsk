@@ -3,7 +3,8 @@ export default function CityElementsGrid({
   isUnlocked, 
   showUnlockAnimation, 
   newlyUnlocked,
-  onElementClick 
+  onElementClick,
+  onOpenDetails
 }) {
   return (
     <div className="max-w-6xl mx-auto px-4 mt-8">
@@ -23,8 +24,8 @@ export default function CityElementsGrid({
               `}
               style={{ animationDelay: `${index * 100}ms` }}
               onClick={() => {
-                if (!unlocked) {
-                  onElementClick(element.code);
+                if (onOpenDetails) {
+                  onOpenDetails(element);
                 }
               }}
             >
